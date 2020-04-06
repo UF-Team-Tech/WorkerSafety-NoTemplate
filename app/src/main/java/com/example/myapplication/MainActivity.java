@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         configureNextButton();
+        configureRavinButton();
     }
 
     private void configureNextButton(){
@@ -30,5 +31,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void configureRavinButton(){
+        Button nextButton = (Button) findViewById(R.id.ravin);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Ravin.class));
+            }
+        });
+    }
 
 }
