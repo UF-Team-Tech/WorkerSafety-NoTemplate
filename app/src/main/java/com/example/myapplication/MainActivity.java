@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         configureNextButton();
+        configureGannaButton();
     }
 
     private void configureNextButton(){
@@ -26,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            }
+        });
+    }
+    private void configureGannaButton(){
+        Button nextButton = (Button) findViewById(R.id.ganna);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Ganna.class));
             }
         });
     }

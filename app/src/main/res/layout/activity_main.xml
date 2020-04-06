@@ -23,4 +23,15 @@
         tools:layout_editor_absoluteX="122dp"
         tools:layout_editor_absoluteY="122dp" />
 
+    <Button
+        android:id="@+id/ganna"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="123dp"
+        android:layout_marginLeft="123dp"
+        android:layout_marginTop="266dp"
+        android:text="ganna"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
