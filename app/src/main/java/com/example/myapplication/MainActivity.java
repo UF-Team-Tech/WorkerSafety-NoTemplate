@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         configureNextButton();
+        configurevidaButton();
     }
 
     private void configureNextButton(){
@@ -30,5 +31,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    private void configurevidaButton(){
+        Button nextButton = (Button) findViewById(R.id.vida);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, VIDA.class));
+            }
+        });
+    }
 }
