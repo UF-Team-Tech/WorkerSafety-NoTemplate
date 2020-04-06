@@ -24,5 +24,5 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.example.myapplication", appContext.getPackageName());
     }
-//hello
+//hello it is me
 }
