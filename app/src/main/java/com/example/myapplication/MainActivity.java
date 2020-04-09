@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         configureNextButton();
         configurevidaButton();
+        configureRobinButton();
     }
 
     private void configureNextButton(){
@@ -41,4 +42,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private void configureRobinButton(){
+        Button nextButton = (Button) findViewById(R.id.robin);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Robin.class));
+            }
+        });
+    }
+
+
 }

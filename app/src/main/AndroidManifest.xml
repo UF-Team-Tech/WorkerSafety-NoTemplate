@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".VIDA"></activity>
+        <activity android:name=".Robin"></activity>
         <activity android:name=".SecondActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
