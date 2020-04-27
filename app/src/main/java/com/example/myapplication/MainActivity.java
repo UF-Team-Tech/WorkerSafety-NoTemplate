@@ -7,16 +7,18 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
-    ArrayList list = new ArrayList();
+    ArrayList<String> list = new ArrayList<String>();
     ArrayAdapter adapter;
 
     @Override
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.list_view);
 
-        list.add("burrito");
+        list.add("burrito1");
         list.add("burrito");
         list.add("burrito");
         list.add("burrito");
@@ -50,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                //Toast.makeText(MainActivity.this, list.get(position), Toast.LENGTH_SHORT).show();
+                Intent rob = new Intent(MainActivity.this, Robin.class);
+                rob.putExtra("Value1", list.get(position));
+                startActivity(rob);
+            }
+        });
 
 
         configureNextButton();
