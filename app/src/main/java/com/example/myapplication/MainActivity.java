@@ -44,11 +44,20 @@ public class MainActivity extends AppCompatActivity {
     }
     private void configureRobinButton(){
         Button nextButton = (Button) findViewById(R.id.robin);
+
+
         nextButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Robin.class));
+                Intent i = new Intent(MainActivity.this, Robin.class);
+                Bundle extras = new Bundle();
+                extras.putString("USER_NAME","jhon Doe");
+                extras.putInt("USER_ID", 21);
+                i.putExtras(extras);
+                //i.putExtra("Value1", "This value one for robin ");
+                //i.putExtra("Value2", 5);
+                startActivity(i);
             }
         });
     }
