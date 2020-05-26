@@ -41,22 +41,28 @@ public class Robin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_robin);
 
-        //recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
+
+        list.add("bur");
+        list.add("bur1");
+        list.add("bur2");
+        list.add("bur3");
+        list.add("bur4");
 
 
         // use a linear layout manager
-        /*layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);*/
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        /*mAdapter = new MyAdapter(list);
-        recyclerView.setAdapter(mAdapter);*/
+        mAdapter = new MyAdapter(list);
+        recyclerView.setAdapter(mAdapter);
 
-        listView = (ListView)findViewById(R.id.list_view);
+        //listView = (ListView)findViewById(R.id.list_view);
         //recycle_view
 
-        adapter = new ArrayAdapter(Robin.this, android.R.layout.simple_list_item_1, list);
-        listView.setAdapter(adapter);
+        //adapter = new ArrayAdapter(Robin.this, android.R.layout.simple_list_item_1, list);
+        //listView.setAdapter(adapter);
 
         configureBackButton();
 
@@ -149,7 +155,7 @@ public class Robin extends AppCompatActivity {
         String ConnURL = null;
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            ConnURL = "jdbc:jtds:sqlserver://teamtech-sqlserver.database.windows.net:1433;DatabaseName=TeamTechSqlDatabase;user=teamtech@teamtech-sqlserver;password=NOTTHEPASSWORDLOL;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+            ConnURL = "jdbc:jtds:sqlserver://teamtech-sqlserver.database.windows.net:1433;DatabaseName=TeamTechSqlDatabase;user=teamtech@teamtech-sqlserver;password=Zxcv4321;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 
             conn = DriverManager.getConnection(ConnURL);
 
