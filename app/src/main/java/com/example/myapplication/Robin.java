@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -8,7 +10,9 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,17 +21,42 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Robin extends AppCompatActivity {
 
     public TextView message;
     public Connection con;
     public Button run;
+    ListView listView;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    ArrayList<String> list = new ArrayList<String>();
+
+    ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_robin);
+
+        //recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
+
+
+        // use a linear layout manager
+        /*layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);*/
+
+        // specify an adapter (see also next example)
+        /*mAdapter = new MyAdapter(list);
+        recyclerView.setAdapter(mAdapter);*/
+
+        listView = (ListView)findViewById(R.id.list_view);
+        //recycle_view
+
+        adapter = new ArrayAdapter(Robin.this, android.R.layout.simple_list_item_1, list);
+        listView.setAdapter(adapter);
 
         configureBackButton();
 
@@ -44,7 +73,8 @@ public class Robin extends AppCompatActivity {
     public class CheckLogin extends AsyncTask<String, String, String> {
         String z = "";
         Boolean isSuccess = false;
-        String name1 = "";
+        //String name1 = "";
+        //private ArrayList<String> tables = new ArrayList<>();
 
         @Override
         protected void onPreExecute() {
@@ -55,8 +85,9 @@ public class Robin extends AppCompatActivity {
         protected void onPostExecute(String r) {
             Toast.makeText(Robin.this, r, Toast.LENGTH_LONG).show();
             if (isSuccess) {
-                message = (TextView) findViewById(R.id.textView2);
-                message.setText(name1);
+                //message = (TextView) findViewById(R.id.textView2);
+                //message.setText(name1);
+                adapter.notifyDataSetChanged();
             }
         }
 
@@ -71,7 +102,13 @@ public class Robin extends AppCompatActivity {
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next()) {
-                        name1 = rs.getString("City");
+                        //name1 = rs.getString("City");
+                        while (rs.next())
+                        {
+                            list.add(rs.getString("City"));
+                            System.out.println("adding to list");
+                        }
+
                         z = "query successful good job";
                         isSuccess = true;
                         con.close();
@@ -79,6 +116,8 @@ public class Robin extends AppCompatActivity {
                         z = "invalid query :(";
                         isSuccess = false;
                     }
+
+
                 }
             } catch (Exception ex) {
                 isSuccess = false;
@@ -110,7 +149,7 @@ public class Robin extends AppCompatActivity {
         String ConnURL = null;
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            ConnURL = "jdbc:jtds:sqlserver://teamtech-sqlserver.database.windows.net:1433;DatabaseName=TeamTechSqlDatabase;user=teamtech@teamtech-sqlserver;password=PASSWORDHERE;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+            ConnURL = "jdbc:jtds:sqlserver://teamtech-sqlserver.database.windows.net:1433;DatabaseName=TeamTechSqlDatabase;user=teamtech@teamtech-sqlserver;password=NOTTHEPASSWORDLOL;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 
             conn = DriverManager.getConnection(ConnURL);
 
