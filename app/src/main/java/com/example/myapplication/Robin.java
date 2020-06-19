@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Robin extends AppCompatActivity {
 
@@ -33,6 +34,7 @@ public class Robin extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     ArrayList<String> list = new ArrayList<String>();
+    ArrayList<ListStuff> mainlist = new ArrayList<ListStuff>();
 
     ArrayAdapter adapter;
 
@@ -49,13 +51,18 @@ public class Robin extends AppCompatActivity {
         list.add("bur3");
         list.add("bur4");
 
+        mainlist.add(new ListStuff("asdf", "eqwr"));
+        mainlist.add(new ListStuff("asdf", "eqwr"));
+        mainlist.add(new ListStuff("asdf", "eqwr"));
+        mainlist.add(new ListStuff("asdf", "eqwr"));
+
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(list);
+        mAdapter = new MyAdapter(mainlist);
         recyclerView.setAdapter(mAdapter);
 
         //listView = (ListView)findViewById(R.id.list_view);
@@ -93,7 +100,7 @@ public class Robin extends AppCompatActivity {
             if (isSuccess) {
                 //message = (TextView) findViewById(R.id.textView2);
                 //message.setText(name1);
-                adapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
             }
         }
 
@@ -104,14 +111,16 @@ public class Robin extends AppCompatActivity {
                 if (con == null) {
                     z = "internet access might be rough rn buddy";
                 } else {
-                    String query = "Select * from SalesLT.Address";
+                    String query = "Select * from dbo.DimDate2";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next()) {
                         //name1 = rs.getString("City");
                         while (rs.next())
                         {
-                            list.add(rs.getString("City"));
+                            list.add(rs.getString("WorkerID"));
+                            ListStuff row = new ListStuff(rs.getString("WorkerID"), rs.getString("Propane"));
+                            mainlist.add(row);
                             System.out.println("adding to list");
                         }
 

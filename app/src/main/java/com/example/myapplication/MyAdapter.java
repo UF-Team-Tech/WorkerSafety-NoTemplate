@@ -38,10 +38,10 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
 }
 
-    private List<String> mContacts;
+    private List<ListStuff> mContacts;
 
     // Pass in the contact array into the constructor
-    public MyAdapter(List<String> contacts) {
+    public MyAdapter(List<ListStuff> contacts) {
         mContacts = contacts;
     }
 
@@ -62,14 +62,14 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        String contact = mContacts.get(position);
+        ListStuff contact = mContacts.get(position);
 
         // Set item views based on your views and data model
         TextView textView = viewHolder.nameTextView;
-        textView.setText(contact);
-        //Button button = viewHolder.messageButton;
-        //button.setText(contact.isOnline() ? "Message" : "Offline");
-       // button.setEnabled(contact.isOnline());
+        textView.setText(contact.getCity());
+        Button button = viewHolder.messageButton;
+        button.setText(contact.getStateProvince());
+        //button.setEnabled(contact.isOnline());
     }
 
     @Override
