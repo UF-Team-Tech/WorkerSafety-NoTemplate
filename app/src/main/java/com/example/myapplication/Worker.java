@@ -5,18 +5,22 @@ public class Worker {
     private String workerID, firstname, lastname;
     //latitude, longitude
     private double latitude, longitude;
+    private Acceleration a;
+    private AirQuality cond;
     //status: air quality and acceleration (Status class objects
 
     //birthday
     //phone number
     //email
 
-    public Worker(String w, String first, String last, double lat, double lon){
+    public Worker(String w, String first, String last, double lat, double lon, AirQuality cond, Acceleration a){
         workerID = w;
         firstname = first;
         lastname = last;
         latitude = lat;
         longitude = lon;
+        this.a = a;
+        this.cond = cond;
     }
 
     public String getWorkerID(){
@@ -58,5 +62,9 @@ public class Worker {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String toString(){
+        return workerID + " " + firstname + " " + lastname + " " + latitude + " " + longitude+ " "  + cond.getCurrentStatus() + a.getMaxAcceleration();
     }
 }

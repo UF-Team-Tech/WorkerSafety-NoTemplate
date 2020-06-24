@@ -1,11 +1,12 @@
 package com.example.myapplication;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Queue;
 
 public class Gas {
     private String name;
-    private ArrayDeque<Double> lastTenReadings;
+    public ArrayList<Double> lastTenReadings;
     private final double yellowThreshold, redThreshold;
     private double timeExposed;
 
@@ -14,7 +15,7 @@ public class Gas {
         yellowThreshold = y;
         redThreshold = r;
         timeExposed = 0;
-        lastTenReadings = new ArrayDeque<Double>();
+        lastTenReadings = new ArrayList<Double>();
     }
 
     public double getYellowThreshold() {
@@ -37,25 +38,42 @@ public class Gas {
         this.timeExposed = timeExposed;
     }
 
-    public double getChange(){
-        //Calculate change in 10 values, see if it is beyond thresholds
-        //Possibly percentage change, rate of change, catch fluctuations in data
-        //Predict danger zones (next reading is going to trigger signal)
-        return 0;
+    public void addNewSensorValue(double val){
+        if(lastTenReadings.size() == 10){
+            lastTenReadings.remove(0);
+        }
+        lastTenReadings.add(val);
+    }
+
+    public boolean isRapidlyIncreasing(){
+        //Calculate change in last 3 values, see if it is beyond thresholds
+        if(lastTenReadings.size() < 3)
+            return false;
+        int len = lastTenReadings.size();
+        double old = lastTenReadings.get(len - 3);
+        double ish = lastTenReadings.get(len - 2);
+        double  new1 = lastTenReadings.get(len - 1);
+        double sum = (new1 - ish) / ish + (ish - old) / old; //this is the sum of the last two percentage changes
+        if(new1 > (yellowThreshold / 2.0) && sum > 0.5) //where 0.5 is considered a large percent increase
+            return true;
+        else
+            return false;
     }
 
     public int getGasStatus(){
-        double result = getChange();
-        //TODO- if getChange() is strange, return 0 (unknown)
-        if(lastTenReadings.peek() >= redThreshold) {
+        int len = lastTenReadings.size();
+        if(lastTenReadings.get(len - 1) >= redThreshold) {
             return 3; //red
         }
-        else if(lastTenReadings.peek() >= yellowThreshold) {
+        else if(lastTenReadings.get(len - 1) >= yellowThreshold) {
             return 2; //yellow
         }
+        else if(isRapidlyIncreasing())
+            return 1; //warning
         else
-            return 1; //green
+            return 0; //green
     }
+
 
 
 

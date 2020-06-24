@@ -8,7 +8,7 @@ import java.util.Queue;
 
 public class AirQuality extends Status {
 
-    private ArrayList<Gas> gases;
+    public ArrayList<Gas> gases;
     //TODO- account for smoke variable in status calculation
     private boolean smoke;
 
@@ -17,7 +17,7 @@ public class AirQuality extends Status {
         super();
         gases = new ArrayList<Gas>();
         //TODO- Remember to consider time!!
-        gases.add(new Gas("Carbon Monoxide",35, 50));
+        gases.add(new Gas("CarbonMonoxide",35, 50));
         gases.add(new Gas("Methane",1000, 50000));
         gases.add(new Gas("Propane",17000, 23000));
         smoke = false;

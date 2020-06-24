@@ -4,9 +4,9 @@ public class Acceleration extends Status {
 
     private double maxAcceleration;
 
-    public Acceleration(){
+    public Acceleration(double d){
         super();
-        maxAcceleration = 0;
+        maxAcceleration = d;
     }
 
     @Override
