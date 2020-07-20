@@ -62,6 +62,9 @@ public class Gas {
 
     public int getGasStatus(){
         int len = lastTenReadings.size();
+        if(len <= 0){
+            return 0;
+        }
         if(lastTenReadings.get(len - 1) >= redThreshold) {
             return 3; //red
         }

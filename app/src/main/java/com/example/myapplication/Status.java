@@ -13,15 +13,24 @@ public abstract class Status {
         currentStatus = "Unknown";
     }
 
-    public void setStatus(){
-        if(red) {
+    public void setStatus(int max){
+        if(max == 3) {
             currentStatus = "Red";
+            red = true;
+            yellow = false;
+            green = false;
         }
-        else if(yellow) {
+        else if(max == 2) {
             currentStatus = "Yellow";
+            yellow = true;
+            red = false;
+            green = false;
         }
-        else if(green){
+        else if(max == 0){
             currentStatus = "Green";
+            green = true;
+            red = false;
+            yellow = false;
         }
         else {
             currentStatus = "Unknown";

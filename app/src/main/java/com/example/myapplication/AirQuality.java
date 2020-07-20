@@ -41,10 +41,26 @@ public class AirQuality extends Status {
         }
         if(smoke)
             max = 3;
-        //set new current status
+        setStatus(max);
     }
 
+    public void setSmoke(int i){
+        if(i == 1)
+            smoke = true;
+        else
+            smoke = false;
+    }
 
+    public String toString(){
+        String s = "";
+        for(Gas g : gases){
+            if(g.lastTenReadings.size() > 0){
+                s = s + g.getName() + ": " + g.lastTenReadings.get(g.lastTenReadings.size() - 1) + "  |  ";
+            }
+        }
+        s = s + "Smoke: " + smoke + "\n";
+        return s;
+    }
 
 
 }

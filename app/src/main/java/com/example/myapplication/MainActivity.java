@@ -48,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
         mainlist.add(new ListStuff("asdf", "eqwr"));
-        mainlist.add(new ListStuff("asdf", "eqwr"));
-        mainlist.add(new ListStuff("asdf", "eqwr"));
-        mainlist.add(new ListStuff("asdf", "eqwr"));
 
 
 
@@ -157,22 +154,24 @@ public class MainActivity extends AppCompatActivity {
                 if (con == null) {
                     z = "internet access might be rough rn buddy";
                 } else {
-                    String query = "Select * from dbo.DimDate2";
+                    String query = "Select * from dbo.TeamTechSampleDataFixed";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if (rs.next()) {
                         //name1 = rs.getString("City");
                         while (rs.next())
                         {
-                            ListStuff row = new ListStuff(rs.getString("WorkerID"), rs.getString("Propane"));
-                            mainlist.add(row);
                             AirQuality cond = new AirQuality();
                             for(Gas g : cond.gases){
                                 g.lastTenReadings.add(rs.getDouble(g.getName()));
+                                Log.d("hi", cond.toString());
                             }
                             Acceleration a = new Acceleration(rs.getDouble("Acceleration"));
-                            Worker friend = new Worker(rs.getString("WorkerID"), "a", "a", 0, 0, cond, a);
-                            workers.add(friend);
+                            Worker worker = new Worker(rs.getString("WorkerID"), "a", "a", 0, 0, cond, a);
+                            workers.add(worker);
+                            cond.refresh();
+                            ListStuff row = new ListStuff(rs.getString("WorkerID"), cond.getCurrentStatus());
+                            mainlist.add(row);
                             Log.d("hi", workers.toString());
                             System.out.println("adding to list");
                         }
@@ -202,7 +201,8 @@ public class MainActivity extends AppCompatActivity {
         String ConnURL = null;
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            ConnURL = "jdbc:jtds:sqlserver://teamtechsql.database.windows.net:1433;DatabaseName=TeamTechDB2;user=ravin@teamtechsql;password=;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+            //check ur password buddy
+            ConnURL = "jdbc:jtds:sqlserver://teamtechsql.database.windows.net:1433;DatabaseName=TeamTechDB2;user=ravin@teamtechsql;password=bracketman27!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
             conn = DriverManager.getConnection(ConnURL);
         }catch (SQLException se){
             Log.e("ERROR", se.getMessage());

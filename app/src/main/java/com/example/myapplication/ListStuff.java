@@ -1,4 +1,5 @@
 package com.example.myapplication;
+
 public class ListStuff {
     private String city;
     private String stateProvince;

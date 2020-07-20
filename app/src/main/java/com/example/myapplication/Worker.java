@@ -65,6 +65,6 @@ public class Worker {
     }
 
     public String toString(){
-        return workerID + " " + firstname + " " + lastname + " " + latitude + " " + longitude+ " "  + cond.getCurrentStatus() + a.getMaxAcceleration();
+        return workerID + " " + firstname + " " + lastname + " " + latitude + " " + longitude+ " "  + cond.getCurrentStatus() + " " + a.getMaxAcceleration() + " \n\t" + cond;
     }
 }
