@@ -2,7 +2,7 @@ package com.example.myapplication;
 
 public class Worker {
     //workerID, first name, last name
-    private String workerID, firstname, lastname;
+    private String workerID, firstname, lastname, email, phonenumber;
     //latitude, longitude
     private double latitude, longitude;
     private Acceleration a;
@@ -10,8 +10,6 @@ public class Worker {
     //status: air quality and acceleration (Status class objects
 
     //birthday
-    //phone number
-    //email
 
     public Worker(String w, String first, String last, double lat, double lon, AirQuality cond, Acceleration a){
         workerID = w;
@@ -66,5 +64,21 @@ public class Worker {
 
     public String toString(){
         return workerID + " " + firstname + " " + lastname + " " + latitude + " " + longitude+ " "  + cond.getCurrentStatus() + " " + a.getMaxAcceleration() + " \n\t" + cond;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 }
