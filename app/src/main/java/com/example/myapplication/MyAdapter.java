@@ -16,7 +16,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public TextView nameTextView;
+        public TextView nameTextView1;
+        public TextView nameTextView2;
+        public TextView nameTextView3;
         public Button messageButton;
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -24,7 +26,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
-            nameTextView = (TextView) itemView.findViewById(R.id.workerid);
+            nameTextView1 = (TextView) itemView.findViewById(R.id.workerid);
+            nameTextView2 = (TextView) itemView.findViewById(R.id.firstname);
+            nameTextView3 = (TextView) itemView.findViewById(R.id.lastname);
             messageButton = (Button) itemView.findViewById(R.id.message_button);
         }
     }
@@ -49,17 +53,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // Get the data model based on position
         ListStuff worker = mContacts.get(position);
         // Set item views based on your views and data model
-        TextView workerid = viewHolder.nameTextView;
-        workerid.setBackgroundColor(Color.CYAN);
+        TextView workerid = viewHolder.nameTextView1;
+        workerid.setBackgroundColor(Color.WHITE);
         workerid.setText(worker.getWorkerid());
 
-        TextView firstname = viewHolder.nameTextView;
-        firstname.setBackgroundColor(Color.BLUE);
-        firstname.setText(worker.getWorkerid());
+        TextView firstname = viewHolder.nameTextView2;
+        firstname.setBackgroundColor(Color.WHITE);
+        firstname.setText(worker.getFirstname());
 
-        TextView lastname = viewHolder.nameTextView;
-        lastname.setBackgroundColor(Color.BLUE);
-        lastname.setText(worker.getWorkerid());
+        TextView lastname = viewHolder.nameTextView3;
+        lastname.setBackgroundColor(Color.WHITE);
+        lastname.setText(worker.getLastname());
 
         Button status = viewHolder.messageButton;
         status.setText(worker.getStatus());

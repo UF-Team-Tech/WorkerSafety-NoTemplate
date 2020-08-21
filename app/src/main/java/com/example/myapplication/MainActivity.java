@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
-        mainlist.add(new ListStuff("asdf", "eqwr", "taco", "unknown"));
+        mainlist.add(new ListStuff("Worker Id", "First Name", "Last Name", "Status"));
 
 
 
@@ -154,14 +155,15 @@ public class MainActivity extends AppCompatActivity {
                 if (con == null) {
                     z = "internet access might be rough rn buddy";
                 } else {
-                    String query = "Select * from dbo.TeamTechSampleDataFixed";
+                    String query = "Select * from [dbo].[TeamTechWorkers] INNER JOIN [dbo].[TeamTechSampleDataFixed] ON [dbo].[TeamTechWorkers].WorkerID = [dbo].[TeamTechSampleDataFixed].WorkerID;";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
 
 
-                    if (rs.next()) {
+//                    if (rs.next()) {
                         //name1 = rs.getString("City");
+//                        boolean s = rs.next();
                         while (rs.next())
                         {
                             AirQuality cond = new AirQuality();
@@ -171,12 +173,13 @@ public class MainActivity extends AppCompatActivity {
                             }
                             Acceleration a = new Acceleration(rs.getDouble("Acceleration"));
                             String lookup = rs.getString("WorkerID");
-                            String query1 = "Select * from [dbo].[TeamTechWorkers] where workerId = " +  lookup + ";";
-                            ResultSet rs1 = stmt.executeQuery(query1);
-                            Worker worker = new Worker(lookup, rs1.getString("FirstName"), rs1.getString("LastName"), 0, 0, cond, a);
+//                            String query1 = "Select * from [dbo].[TeamTechWorkers] where workerId = " +  lookup + ";";
+//                            ResultSet rs1 = stmt.executeQuery(query1);
+//                            rs1.next();
+                            Worker worker = new Worker(lookup, rs.getString("FirstName"), rs.getString("LastName"), 0, 0, cond, a);
                             workers.add(worker);
                             cond.refresh();
-                            ListStuff row = new ListStuff(lookup, rs1.getString("FirstName"), rs1.getString("LastName"), cond.getCurrentStatus());
+                            ListStuff row = new ListStuff(lookup, rs.getString("FirstName"), rs.getString("LastName"), cond.getCurrentStatus());
                             mainlist.add(row);
                             Log.d("hi", workers.toString());
                             System.out.println("adding to list");
@@ -184,10 +187,11 @@ public class MainActivity extends AppCompatActivity {
                         z = "query successful good job";
                         isSuccess = true;
                         con.close();
-                    } else {
-                        z = "invalid query :(";
-                        isSuccess = false;
-                    }
+//                    }
+//                    else {
+//                        z = "invalid query :(";
+//                        isSuccess = false;
+//                    }
                 }
             } catch (Exception ex) {
                 isSuccess = false;
@@ -208,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
             //check ur password buddy
-            ConnURL = "jdbc:jtds:sqlserver://teamtechsql.database.windows.net:1433;DatabaseName=TeamTechDB2;user=ravin@teamtechsql;password=hackme!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+            ConnURL = "jdbc:jtds:sqlserver://teamtechsql.database.windows.net:1433;DatabaseName=TeamTechDB2;user=ravin@teamtechsql;password=;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
             conn = DriverManager.getConnection(ConnURL);
         }catch (SQLException se){
             Log.e("ERROR", se.getMessage());

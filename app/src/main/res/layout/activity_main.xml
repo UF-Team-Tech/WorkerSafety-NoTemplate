@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/babyblue"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/nextscreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="207dp"
-        android:layout_marginLeft="207dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginLeft="148dp"
         android:layout_marginTop="36dp"
         android:text="Next Screen"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,20 +27,19 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="36dp"
-        android:text="Robin"
+        android:text="Settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_view"
-        android:layout_width="127dp"
-        android:layout_height="729dp"
-        android:layout_marginStart="151dp"
-        android:layout_marginLeft="151dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="133dp"
-        android:layout_marginRight="133dp"
+        android:layout_width="390dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="112dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/robin" />
 
@@ -45,14 +47,13 @@
         android:id="@+id/recyclebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginLeft="53dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="111dp"
-        android:layout_marginRight="111dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:text="VIDAAAA"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/recycle_view"
-        app:layout_constraintTop_toBottomOf="@+id/nextscreen" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
