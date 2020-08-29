@@ -5,4 +5,6 @@
     <color name="colorAccent">#03DAC5</color>
     <color name = "babyblue"> #89CFF0 </color>
     <color name = "purple"> #B19CD9 </color>
+    <color name = "black"> #000000 </color>
+    <color name = "darkgrey"> #272727 </color>
 </resources>

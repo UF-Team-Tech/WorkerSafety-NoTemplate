@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,27 +69,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ItemClickSupport.addTo(recyclerView)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        // do it
+                    }
+                }); 
+//        recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//
+//            @Override
+//            public void onItemClick(AdapterView parent, View view, int position, long id) {
+//                //Toast.makeText(MainActivity.this, list.get(position), Toast.LENGTH_SHORT).show();
+//                Intent rob = new Intent(MainActivity.this, Robin.class);
+//                rob.putExtra("Value1", mainlist.get(position));
+//                startActivity(rob);
+//            }
+
        /* listView = (ListView)findViewById(R.id.list_view);
         list.add("burrito1");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
-        list.add("burrito");
         list.add("burrito");
 
         adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, list);
